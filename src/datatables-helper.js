@@ -7,36 +7,36 @@
     base.el = el;
 
     base.init = function () {
-      base.metadata = base.$el.data ()
+      base.metadata = base.$el.data ();
 
       base.options = $.extend({},$.dataTableHelper.defaultOptions, options, base.metadata);
 
-      base.options.ordering = true    
-      base.options.searching = true
+      base.options.ordering = true;
+      base.options.searching = true;
     };
 
     base.init();
 
-    var sortableArray = []
+    var sortableArray = [];
 
     base.$el.find ('thead th').each (function (i) {
-      var bool = ($(this).data ('sortable')) ? true : false
+      var bool = ($(this).data ('sortable')) ? true : false;
       sortableArray.push ({ orderable: bool })
-    })
+    });
 
-    base.options.columns = sortableArray
+    base.options.columns = sortableArray;
 
       base.options.initComplete = function () {
 
         var api = this.api ()
             , row = $('<tr>')
             , orderArray = []
-            , filterCount = 0
+            , filterCount = 0;
 
         api.columns ().indexes ().flatten ().each (function (colIndex) {
           var column = api.column (colIndex)
               , $col = $(column.header ())
-              , th = $('<th>&nbsp;</th>')
+              , th = $('<th>&nbsp;</th>');
 
           if ($col.data ('filterable') == 'text') {
             var input = $('<input type="text" class="form-control input-sm" />')
@@ -45,14 +45,14 @@
                   api
                     .column (colIndex)
                     .search (this.value)
-                    .draw ()
+                    .draw ();
 
                 var nodes = $(column.nodes ())
-                    , index = $col.index () + 1
+                    , index = $col.index () + 1;
 
 
                 highlightColumn (column, index, this.value)                  
-            })                  
+            });
 
             filterCount++
           }
@@ -62,18 +62,18 @@
                 .appendTo(th.empty ())
                 .on( 'change', function () {
                   var val = $(this).val()
-                      , index = $col.index () + 1
+                      , index = $col.index () + 1;
 
                   column
                     .search( val ? '^'+val+'$' : '', true, false )
-                    .draw()
+                    .draw();
 
                   highlightColumn (column, index, val)
-                })
+                });
 
             column.data ().unique ().sort ().each (function (d, j) {
               select.append('<option value="' + d + '">' + d + '</option>')
-            })              
+            })              ;
 
             filterCount++
           }
@@ -82,10 +82,10 @@
             if ($(this).data ('sort-order') === undefined) { $(this).data ('sort-order', 1000) }
           }).sort (sortLI).each (function () {
             orderArray.push ([$(this).index (), $(this).data ('direction') ])
-          })
+          });
 
           row.append (th)                                                                                                                                       
-        })
+        });
 
         if (orderArray.length > 0) {
           api.order (orderArray).draw ()
@@ -96,9 +96,9 @@
         }
 
         api.draw ()
-      }
+      };
       
-      var $thisTable = base.$el.dataTable (base.options).addClass ('dataTable-helper')
+      var $thisTable = base.$el.dataTable (base.options).addClass ('dataTable-helper');
 
       if (!base.options.globalSearch) {
         $thisTable.parents ('.dataTables_wrapper').find ('.dataTables_filter').remove ()
@@ -112,15 +112,15 @@
     }
 
     function highlightColumn (column, index, val) {
-      console.log (column)
+      //console.log (column);
       if (val == '') {
-        $(column.header ()).removeClass ('highlight')
-        $(column.nodes ()).removeClass ('highlight')
-        $(column.footer ()).removeClass ('highlight')
+        $(column.header ()).removeClass ('highlight');
+        $(column.nodes ()).removeClass ('highlight');
+        $(column.footer ()).removeClass ('highlight');
       } else {
-        $(column.header ()).addClass ('highlight')
-        $(column.nodes ()).addClass ('highlight')
-        $(column.footer ()).addClass ('highlight')        
+        $(column.header ()).addClass ('highlight');
+        $(column.nodes ()).addClass ('highlight');
+        $(column.footer ()).addClass ('highlight')    ;
       }
     }
 
