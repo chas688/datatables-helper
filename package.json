@@ -1,4 +1,24 @@
 {
   "name": "datatables-helper",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "description": "A wrapper around datatables-helper for npm packages.",
+  "main": "src/datatables-helper.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chas688/datatables-helper.git"
+  },
+  "keywords": [
+    "datatables",
+    "plugin",
+    "helper"
+  ],
+  "author": "rodh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chas688/datatables-helper/issues"
+  },
+  "homepage": "https://github.com/chas688/datatables-helper#readme"
 }
